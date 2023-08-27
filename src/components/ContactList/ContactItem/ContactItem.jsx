@@ -2,14 +2,12 @@ import { Contact, ButtonDelete } from './ContactItem.styled';
 import PropTypes from 'prop-types';
 import { FiPhone } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
 
 export const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
-  const deleteContact = id => {
-    dispatch({
-      type: 'contactsList/deleteContact',
-      payload: id,
-    });
+  const deleteThisContact = id => {
+    dispatch(deleteContact(id));
   };
 
   return (
@@ -18,7 +16,7 @@ export const ContactItem = ({ id, name, number }) => {
       <p>
         {name}: {number}
       </p>
-      <ButtonDelete onClick={() => deleteContact(id)}>Delete</ButtonDelete>
+      <ButtonDelete onClick={() => deleteThisContact(id)}>Delete</ButtonDelete>
     </Contact>
   );
 };

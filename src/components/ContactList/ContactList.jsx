@@ -1,15 +1,11 @@
 import { List } from './ContactList.styled';
 import { ContactItem } from './ContactItem';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(state => state.contactsList.contacts);
-  const filter = useSelector(state => state.filter.filter);
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   const normalizedFilter = filter.toLowerCase();
   const filteredContacts = contacts.filter(contact =>
